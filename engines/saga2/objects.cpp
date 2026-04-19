@@ -1692,7 +1692,7 @@ bool GameObject::placeObject(
 
 	TilePoint       slot;
 	GameObject      *obj = GameObject::objectAddress(objID),
-	                 *mergeObj;
+	                 *mergeObj = nullptr;
 
 	if (getAvailableSlot(obj, &slot, canMerge, &mergeObj)) {
 		if (canMerge && mergeObj != nullptr)
