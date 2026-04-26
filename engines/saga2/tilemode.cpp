@@ -116,7 +116,9 @@ void cheatMove(int16 key);
 void incrementActiveFaction(Actor *a);
 
 //  dispatch functions
-static APPFUNC(cmdClickTileMap);                 // appFunc for map display
+static APPFUNC(cmdClickTileMap) {
+	// ... logic implementation ...
+}
 static StaticTilePoint tilePickPos = {0, 0, 0},       // mouse coord over tilemap (floor)
                        tilePickExactPos = {0, 0, 0},  // mouse coord of click on tilemap
                        objPickPos = {0, 0, 0},        // coord of mouse picked object
@@ -739,6 +741,25 @@ void TileModeHandleTask() {
 	//mm("daytime transition update loop");
 	dayNightUpdate();
 
+	// Autosave check
+	if (g_vm->_autosaveAlarm.check() && extendedThreadLevel == 0) {
+		g_vm->_autosaveAlarm.set(5 * 60 * kTicksPerSecond);
+
+		TimeDate td;
+		g_system->getTimeAndDate(td);
+
+		Common::String saveName = Common::String::format(
+		                              "Autosave %d (%02d:%02d)",
+		                              g_vm->_autosaveSlotIndex + 1,
+		                              td.tm_hour,
+		                              td.tm_min);
+
+		g_vm->saveGameState(g_vm->_autosaveSlotIndex, saveName, true);
+
+		//  Cycle through 3 autosave slots (0-2)
+		g_vm->_autosaveSlotIndex = (g_vm->_autosaveSlotIndex + 1) % 3;
+	}
+
 	//  If it's time to do a new frame.
 	if (frameAlarm.check()
 	        &&  tileLockFlag == 0) {
@@ -917,7 +938,11 @@ void TileModeHandleKey(int16 key, int16 qual) {
 
 	//-----------------------------------------------------------------------
 
-	switch (tolower(key)) {
+	//  Avoid using tolower on non-ASCII keys as it can corrupt keycodes
+	//  for function keys etc.
+	int16 lowerKey = (key >= 'A' && key <= 'Z') ? tolower(key) : key;
+
+	switch (lowerKey) {
 
 	case ' ':
 		abortSpeech();
@@ -944,16 +969,19 @@ void TileModeHandleKey(int16 key, int16 qual) {
 		if (uiKeysEnabled)
 			toggleIndivMode();
 		break;
-	case '1':
-		if (uiKeysEnabled)
+	case Common::KEYCODE_F1:
+	case Common::ASCII_F1:
+		if (uiKeysEnabled && !isBrotherDead(FTA_JULIAN))
 			setCenterBrother(FTA_JULIAN);
 		break;
-	case '2':
-		if (uiKeysEnabled)
+	case Common::KEYCODE_F2:
+	case Common::ASCII_F2:
+		if (uiKeysEnabled && !isBrotherDead(FTA_PHILIP))
 			setCenterBrother(FTA_PHILIP);
 		break;
-	case '3':
-		if (uiKeysEnabled)
+	case Common::KEYCODE_F3:
+	case Common::ASCII_F3:
+		if (uiKeysEnabled && !isBrotherDead(FTA_KEVIN))
 			setCenterBrother(FTA_KEVIN);
 		break;
 	case 'o':
@@ -1287,9 +1315,15 @@ static APPFUNC(cmdClickTileMap) {
 			            ||  lineOfSight(a, TAILoc, kTerrainTransparent)))
 				MotionTask::useTAI(*a, *pickedTAI);
 		} else {
-			tileMapControl->setSticky(true);
-			setMouseImage(kMouseAutoWalkImage, -8, -8);
-			mousePressed = true;
+
+
+			if (!g_vm->_classicDblClick) {
+				navigateDirect(walkToPos, true);
+			} else {
+				tileMapControl->setSticky(true);
+				setMouseImage(kMouseAutoWalkImage, -8, -8);
+				mousePressed = true;
+			}
 		}
 		break;
 
