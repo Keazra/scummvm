@@ -944,16 +944,16 @@ void TileModeHandleKey(int16 key, int16 qual) {
 		if (uiKeysEnabled)
 			toggleIndivMode();
 		break;
-	case '1':
-		if (uiKeysEnabled)
+	case Common::KEYCODE_F1:
+		if (uiKeysEnabled && !isBrotherDead(FTA_JULIAN))
 			setCenterBrother(FTA_JULIAN);
 		break;
-	case '2':
-		if (uiKeysEnabled)
+	case Common::KEYCODE_F2:
+		if (uiKeysEnabled && !isBrotherDead(FTA_PHILIP))
 			setCenterBrother(FTA_PHILIP);
 		break;
-	case '3':
-		if (uiKeysEnabled)
+	case Common::KEYCODE_F3:
+		if (uiKeysEnabled && !isBrotherDead(FTA_KEVIN))
 			setCenterBrother(FTA_KEVIN);
 		break;
 	case 'o':

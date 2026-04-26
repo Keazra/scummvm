@@ -1004,7 +1004,10 @@ void gToolBase::handleKeyStroke(Common::Event &event) {
 	gWindow *w = _activeWindow;
 	gPanel  *ctl;
 
-	uint16 key = event.kbd.ascii; // FIXME
+	uint16 key = event.kbd.ascii;
+	if (key == 0) {
+		key = event.kbd.keycode;
+	}
 	uint16 qualifier = 0;
 
 	if (event.kbd.flags & Common::KBD_SHIFT)
