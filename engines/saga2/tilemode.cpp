@@ -23,6 +23,7 @@
  *   (c) 1993-1996 The Wyrmkeep Entertainment Co.
  */
 
+#include "common/scummsys.h"
 #include "common/events.h"
 
 #include "saga2/saga2.h"
@@ -116,9 +117,7 @@ void cheatMove(int16 key);
 void incrementActiveFaction(Actor *a);
 
 //  dispatch functions
-static APPFUNC(cmdClickTileMap) {
-	// ... logic implementation ...
-}
+static APPFUNC(cmdClickTileMap);                 // appFunc for map display
 static StaticTilePoint tilePickPos = {0, 0, 0},       // mouse coord over tilemap (floor)
                        tilePickExactPos = {0, 0, 0},  // mouse coord of click on tilemap
                        objPickPos = {0, 0, 0},        // coord of mouse picked object

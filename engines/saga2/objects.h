@@ -648,6 +648,18 @@ public:
 		return (_prototype->flags & ResourceObjectPrototype::kObjPropMergeable) != 0;
 	}
 
+	bool isArmor() const {
+		return (_prototype->containmentSet() & ProtoObj::kIsArmor) != 0;
+	}
+
+	bool isWeapon() const {
+		return (_prototype->containmentSet() & ProtoObj::kIsWeapon) != 0;
+	}
+
+	weaponID getWeaponID() const {
+		return (weaponID)_data.bParam;
+	}
+
 	//  A timer for this object has ticked
 	void timerTick(TimerID timer);
 
