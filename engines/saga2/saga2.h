@@ -34,6 +34,7 @@
 #include "saga2/idtypes.h"
 #include "saga2/weapons.h"
 #include "saga2/vdraw.h"
+#include "saga2/fta.h"
 
 namespace Video {
 class SmackerDecoder;
@@ -202,9 +203,12 @@ public:
 
 	bool _indivControlsFlag;
 	bool _userControlsSetup;
+	bool _classicDblClick;
 	int _fadeDepth;
 	int _currentMapNum;
 
+	int _autosaveSlotIndex;
+	Alarm _autosaveAlarm;
 
 private:
 	const SAGA2GameDescription *_gameDescription;

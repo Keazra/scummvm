@@ -23,6 +23,7 @@
  *   (c) 1993-1996 The Wyrmkeep Entertainment Co.
  */
 
+#include "common/scummsys.h"
 #include "saga2/saga2.h"
 #include "saga2/detection.h"
 #include "saga2/objects.h"
@@ -642,6 +643,45 @@ void GameObject::objCursorText(char nameBuf[], const int8 size, int16 count) {
 				} else {
 					Common::sprintf_s(nameBuf, size, PLURAL_DESC, _data.massCount, objName());     // get the count
 				}
+			}
+		}
+
+		// if this is armor, show its defense
+		if (isArmor()) {
+			Common::strlcat(nameBuf, " (", size);
+			char defenseStr[16];
+			snprintf(defenseStr, sizeof(defenseStr), "Def: %d", _prototype->defenseBonus);
+			Common::strlcat(nameBuf, defenseStr, size);
+			Common::strlcat(nameBuf, ")", size);
+		}
+		// if this is a weapon, show damage stats and type
+		else if (isWeapon()) {
+			weaponID id = this->getWeaponID();
+			WeaponStuff &ws = getWeapon(id);
+			int8 dice, sides, base;
+			effectDamageTypes type;
+
+			if (ws.getPrimaryDamageStats(dice, sides, base, type)) {
+				Common::strlcat(nameBuf, " (", size);
+				char damageStr[32];
+				snprintf(damageStr, sizeof(damageStr), "%dd%d+%d ", dice, sides, base);
+				Common::strlcat(nameBuf, damageStr, size);
+
+				const char *typeName = "Unknown";
+				switch (type) {
+				case kDamageImpact:     typeName = "Impact"; break;
+				case kDamageSlash:      typeName = "Slash"; break;
+				case kDamageProjectile: typeName = "Pierce"; break;
+				case kDamageFire:       typeName = "Fire"; break;
+				case kDamageCold:       typeName = "Cold"; break;
+				case kDamageAcid:       typeName = "Acid"; break;
+				case kDamageLightning:  typeName = "Elec"; break;
+				case kDamagePoison:     typeName = "Poison"; break;
+				case kDamageDirMagic:   typeName = "Magic"; break;
+				default: break;
+				}
+				Common::strlcat(nameBuf, typeName, size);
+				Common::strlcat(nameBuf, ")", size);
 			}
 		}
 	} else {

@@ -98,6 +98,9 @@ Saga2Engine::Saga2Engine(OSystem *syst, const SAGA2GameDescription *desc)
 
 	_indivControlsFlag = false;
 	_userControlsSetup = false;
+	_classicDblClick = false;
+	_autosaveSlotIndex = 0;
+	_autosaveAlarm.set(5 * 60 * kTicksPerSecond); // 5 minutes default
 	_fadeDepth = 1;
 	_currentMapNum = 0;
 

@@ -23,6 +23,7 @@
  *   (c) 1993-1996 The Wyrmkeep Entertainment Co.
  */
 
+#include "common/scummsys.h"
 #include "saga2/saga2.h"
 #include "saga2/dispnode.h"
 #include "saga2/tile.h"

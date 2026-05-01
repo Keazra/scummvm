@@ -45,6 +45,7 @@ public:
 	WeaponEffect() : _next(NULL) {}
 	virtual ~WeaponEffect() {}
 	virtual void implement(Actor *enactor, GameObject *target, GameObject *strikingObj, uint8  strength) = 0;
+	virtual bool getDamageStats(int8 &dice, int8 &sides, int8 &base, effectDamageTypes &type) { return false; }
 };
 
 //-----------------------------------------------------------------------
@@ -76,6 +77,14 @@ public:
 	}
 
 	void implement(Actor *enactor, GameObject *target, GameObject *strikingObj, uint8 trength);
+
+	bool getDamageStats(int8 &dice, int8 &sides, int8 &base, effectDamageTypes &type) override {
+		dice = _dice;
+		sides = _sides;
+		base = _base;
+		type = _type;
+		return true;
+	}
 };
 
 //-----------------------------------------------------------------------
@@ -94,6 +103,15 @@ public:
 	void addEffect(Common::SeekableReadStream *stream);
 	void killEffects();
 	void implement(Actor *enactor, GameObject *target, GameObject *strikingObj, uint8 strength);
+
+	WeaponEffect *getEffects() { return _effects; }
+
+	bool getPrimaryDamageStats(int8 &dice, int8 &sides, int8 &base, effectDamageTypes &type) {
+		for (WeaponEffect *we = _effects; we; we = we->_next) {
+			if (we->getDamageStats(dice, sides, base, type)) return true;
+		}
+		return false;
+	}
 };
 
 //-----------------------------------------------------------------------
