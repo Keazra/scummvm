@@ -939,7 +939,7 @@ void TileModeHandleKey(int16 key, int16 qual) {
 
 	//  Avoid using tolower on non-ASCII keys as it can corrupt keycodes
 	//  for function keys etc.
-	int16 lowerKey = (key >= 'A' && key <= 'Z') ? tolower(key) : key;
+	int16 lowerKey = (key >= 'A' && key <= 'Z') ? Common::toLower((char)key) : key;
 
 	switch (lowerKey) {
 
@@ -968,17 +968,14 @@ void TileModeHandleKey(int16 key, int16 qual) {
 		if (uiKeysEnabled)
 			toggleIndivMode();
 		break;
-	case Common::KEYCODE_F1:
 	case Common::ASCII_F1:
 		if (uiKeysEnabled && !isBrotherDead(FTA_JULIAN))
 			setCenterBrother(FTA_JULIAN);
 		break;
-	case Common::KEYCODE_F2:
 	case Common::ASCII_F2:
 		if (uiKeysEnabled && !isBrotherDead(FTA_PHILIP))
 			setCenterBrother(FTA_PHILIP);
 		break;
-	case Common::KEYCODE_F3:
 	case Common::ASCII_F3:
 		if (uiKeysEnabled && !isBrotherDead(FTA_KEVIN))
 			setCenterBrother(FTA_KEVIN);

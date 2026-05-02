@@ -24,6 +24,7 @@
  */
 
 #include "common/scummsys.h"
+#include "common/translation.h"
 #include "saga2/saga2.h"
 #include "saga2/detection.h"
 #include "saga2/objects.h"
@@ -673,26 +674,26 @@ void GameObject::objCursorText(char nameBuf[], const int8 size, int16 count) {
 				}
 				Common::strlcat(nameBuf, damageStr, size);
 
-				const char *typeName = "Unknown";
+				Common::String typeName = _("Unknown");
 				switch (type) {
-				case kDamageImpact:     typeName = "Impact"; break;
-				case kDamageSlash:      typeName = "Slash"; break;
-				case kDamageProjectile: typeName = "Pierce"; break;
-				case kDamageFire:       typeName = "Fire"; break;
-				case kDamageCold:       typeName = "Cold"; break;
-				case kDamageAcid:       typeName = "Acid"; break;
-				case kDamageLightning:  typeName = "Elec"; break;
-				case kDamagePoison:     typeName = "Poison"; break;
-				case kDamageDirMagic:   typeName = "Magic"; break;
-				case kDamageHeat:       typeName = "Heat"; break;
-				case kDamageMental:     typeName = "Mental"; break;
-				case kDamageUndead:     typeName = "Undead"; break;
-				case kDamageStarve:     typeName = "Starve"; break;
-				case kDamageEnergy:     typeName = "Energy"; break;
-				case kDamageOther:      typeName = "Other"; break;
+				case kDamageImpact:     typeName = _("Impact"); break;
+				case kDamageSlash:      typeName = _("Slash"); break;
+				case kDamageProjectile: typeName = _("Pierce"); break;
+				case kDamageFire:       typeName = _("Fire"); break;
+				case kDamageCold:       typeName = _("Cold"); break;
+				case kDamageAcid:       typeName = _("Acid"); break;
+				case kDamageLightning:  typeName = _("Elec"); break;
+				case kDamagePoison:     typeName = _("Poison"); break;
+				case kDamageDirMagic:   typeName = _("Magic"); break;
+				case kDamageHeat:       typeName = _("Heat"); break;
+				case kDamageMental:     typeName = _("Mental"); break;
+				case kDamageUndead:     typeName = _("Undead"); break;
+				case kDamageStarve:     typeName = _("Starve"); break;
+				case kDamageEnergy:     typeName = _("Energy"); break;
+				case kDamageOther:      typeName = _("Other"); break;
 				default: break;
 				}
-				Common::strlcat(nameBuf, typeName, size);
+				Common::strlcat(nameBuf, typeName.c_str(), size);
 				Common::strlcat(nameBuf, ")", size);
 			}
 		}
