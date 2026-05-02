@@ -968,14 +968,17 @@ void TileModeHandleKey(int16 key, int16 qual) {
 		if (uiKeysEnabled)
 			toggleIndivMode();
 		break;
+
 	case Common::ASCII_F1:
 		if (uiKeysEnabled && !isBrotherDead(FTA_JULIAN))
 			setCenterBrother(FTA_JULIAN);
 		break;
+
 	case Common::ASCII_F2:
 		if (uiKeysEnabled && !isBrotherDead(FTA_PHILIP))
 			setCenterBrother(FTA_PHILIP);
 		break;
+
 	case Common::ASCII_F3:
 		if (uiKeysEnabled && !isBrotherDead(FTA_KEVIN))
 			setCenterBrother(FTA_KEVIN);
