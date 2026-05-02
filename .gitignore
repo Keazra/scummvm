@@ -206,6 +206,7 @@ ipch/
 [Tt]est[Rr]esult*
 *.vcproj
 *.sln
+*.slnx
 *.vsprops
 *.props
 *.vcxproj*
@@ -222,6 +223,8 @@ UpgradeLog.htm
 [Rr]elease32/
 [Dd]ebug64/
 [Rr]elease64/
+[Dd]ebugx64/
+[Rr]eleasex64/
 LLVM32/
 LLVM64/
 
