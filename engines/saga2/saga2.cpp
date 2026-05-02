@@ -412,6 +412,9 @@ void Saga2Engine::readConfig() {
 	if (ConfMan.hasKey("auto_aggression"))
 		_autoAggression = ConfMan.getBool("auto_aggression");
 
+	if (ConfMan.hasKey("classic_dbl_click"))
+		_classicDblClick = ConfMan.getBool("classic_dbl_click");
+
 	_showNight = true;
 
 	if (ConfMan.hasKey("show_night"))

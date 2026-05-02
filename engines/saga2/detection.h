@@ -24,6 +24,8 @@
 
 namespace Saga2 {
 
+#define GAMEOPTION_CLASSIC_DBL_CLICK GUIO_GAMEOPTIONS1
+
 enum GameIds {
 	GID_DINO,
 	GID_FTA2
