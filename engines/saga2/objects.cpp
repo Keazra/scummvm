@@ -664,7 +664,13 @@ void GameObject::objCursorText(char nameBuf[], const int8 size, int16 count) {
 			if (ws.getPrimaryDamageStats(dice, sides, base, type)) {
 				Common::strlcat(nameBuf, " (", size);
 				char damageStr[32];
-				snprintf(damageStr, sizeof(damageStr), "%dd%d+%d ", dice, sides, base);
+				int minDmg = dice + base;
+				int maxDmg = (dice * sides) + base;
+				if (minDmg == maxDmg) {
+					snprintf(damageStr, sizeof(damageStr), "%d ", minDmg);
+				} else {
+					snprintf(damageStr, sizeof(damageStr), "%d-%d ", minDmg, maxDmg);
+				}
 				Common::strlcat(nameBuf, damageStr, size);
 
 				const char *typeName = "Unknown";
@@ -678,6 +684,12 @@ void GameObject::objCursorText(char nameBuf[], const int8 size, int16 count) {
 				case kDamageLightning:  typeName = "Elec"; break;
 				case kDamagePoison:     typeName = "Poison"; break;
 				case kDamageDirMagic:   typeName = "Magic"; break;
+				case kDamageHeat:       typeName = "Heat"; break;
+				case kDamageMental:     typeName = "Mental"; break;
+				case kDamageUndead:     typeName = "Undead"; break;
+				case kDamageStarve:     typeName = "Starve"; break;
+				case kDamageEnergy:     typeName = "Energy"; break;
+				case kDamageOther:      typeName = "Other"; break;
 				default: break;
 				}
 				Common::strlcat(nameBuf, typeName, size);

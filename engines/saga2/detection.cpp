@@ -113,7 +113,7 @@ static const SAGA2GameDescription gameDescriptions[] = {
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO1(GUIO_NOASPECT)
+			GUIO2(GUIO_NOASPECT, GAMEOPTION_CLASSIC_DBL_CLICK)
 		},
 		GID_FTA2
 	},

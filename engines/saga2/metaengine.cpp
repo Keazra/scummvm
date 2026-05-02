@@ -22,6 +22,22 @@
 #include "saga2/saga2.h"
 #include "saga2/detection.h"
 #include "engines/advancedDetector.h"
+#include "common/translation.h"
+
+static const ADExtraGuiOptionsMap optionsList[] = {
+	{
+		GAMEOPTION_CLASSIC_DBL_CLICK,
+		{
+			_s("Classic double click"),
+			_s("Restore original sticky auto-walk on double-click"),
+			"classic_dbl_click",
+			false,
+			0,
+			0
+		}
+	},
+	AD_EXTRA_GUI_OPTIONS_TERMINATOR
+};
 
 class Saga2MetaEngine : public AdvancedMetaEngine<Saga2::SAGA2GameDescription> {
 public:
@@ -31,6 +47,10 @@ public:
 
 	Common::Error createInstance(OSystem *syst, Engine **engine, const Saga2::SAGA2GameDescription *desc) const override;
 	bool hasFeature(MetaEngineFeature f) const override;
+
+	const ADExtraGuiOptionsMap *getAdvancedExtraGuiOptions() const override {
+		return optionsList;
+	}
 };
 
 bool Saga2MetaEngine::hasFeature(MetaEngineFeature f) const {
