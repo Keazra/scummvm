@@ -52,6 +52,7 @@
 #include "saga2/spelshow.h"
 #include "saga2/tilemode.h"
 #include "saga2/vpal.h"
+#include "saga2/hotbar.h"
 
 namespace Saga2 {
 
@@ -76,6 +77,8 @@ Saga2Engine::Saga2Engine(OSystem *syst, const SAGA2GameDescription *desc)
 	_calendar = nullptr;
 	_tmm = nullptr;
 	_cnm = nullptr;
+	_hotbarState = nullptr;
+	_hotbarPanel = nullptr;
 
 	_bandList = nullptr;
 	_mouseInfo = nullptr;
@@ -146,6 +149,7 @@ Saga2Engine::~Saga2Engine() {
 	delete _calendar;
 	delete _tmm;
 	delete _cnm;
+	delete _hotbarState;
 
 	delete _imageCache;
 	delete _mTaskList;
@@ -174,6 +178,7 @@ Common::Error Saga2Engine::run() {
 	_calendar = new CalendarTime;
 	_tmm = new TileModeManager;
 	_cnm = new ContainerManager;
+	_hotbarState = new HotbarState;
 
 	readConfig();
 

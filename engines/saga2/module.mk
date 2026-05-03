@@ -26,6 +26,7 @@ MODULE_OBJS := \
 	grequest.o \
 	gtext.o \
 	gtextbox.o \
+	hotbar.o \
 	hresmgr.o \
 	imagcach.o \
 	interp.o \

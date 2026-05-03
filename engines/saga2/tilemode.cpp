@@ -47,6 +47,8 @@
 #include "saga2/contain.h"
 #include "saga2/saveload.h"
 #include "saga2/oncall.h"
+#include "saga2/weapons.h"
+#include "saga2/hotbar.h"
 
 namespace Saga2 {
 
@@ -648,6 +650,8 @@ void TileModeSetup() {
 	//  Create a control covering the map area.
 	tileMapControl = new gStickyDragControl(*playControls, Rect16(kTileRectX, kTileRectY, kTileRectWidth, kTileRectHeight), 0, cmdClickTileMap);
 
+	g_vm->_hotbarPanel = new HotbarPanel(*tileControls, Rect16(0, 440, 640, 40));
+
 	//Enable Tile Mode Specific Controls
 	tileControls->enable(true);
 
@@ -675,6 +679,9 @@ void TileModeCleanup() {
 //	tileRes = NULL;
 
 	delete tileMapControl;
+
+	delete g_vm->_hotbarPanel;
+	g_vm->_hotbarPanel = nullptr;
 
 //	This Fixes the mousePanel That's not set up
 	g_vm->_toolBase->_mousePanel = nullptr;

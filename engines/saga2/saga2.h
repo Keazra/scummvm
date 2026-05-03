@@ -84,6 +84,8 @@ class PaletteManager;
 class ActorManager;
 class CalendarTime;
 class TileModeManager;
+class HotbarState;
+class HotbarPanel;
 struct SAGA2GameDescription;
 
 enum {
@@ -148,6 +150,8 @@ public:
 	CalendarTime *_calendar;
 	TileModeManager *_tmm;
 	ContainerManager *_cnm;
+	HotbarState *_hotbarState;
+	HotbarPanel *_hotbarPanel;
 
 	WeaponStuff _weaponRack[kMaxWeapons];
 	weaponID _loadedWeapons;
