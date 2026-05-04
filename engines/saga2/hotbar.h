@@ -27,6 +27,9 @@
 
 namespace Saga2 {
 
+constexpr int kNumCharacters = 3;
+constexpr int kMaxHotbarSlots = 9;
+
 class HotbarState {
 public:
 	struct Slot {
@@ -35,7 +38,7 @@ public:
 	};
 
 private:
-	Slot _slots[3][9];
+	Slot _slots[kNumCharacters][kMaxHotbarSlots];
 
 public:
 	HotbarState();

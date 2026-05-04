@@ -150,6 +150,7 @@ Saga2Engine::~Saga2Engine() {
 	delete _tmm;
 	delete _cnm;
 	delete _hotbarState;
+	delete _hotbarPanel;
 
 	delete _imageCache;
 	delete _mTaskList;

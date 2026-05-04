@@ -29,8 +29,8 @@ namespace Saga2 {
 // Hotbar State Implementation
 
 HotbarState::HotbarState() {
-	for (int charIdx = 0; charIdx < 3; ++charIdx) {
-		for (int slotIdx = 0; slotIdx < 9; ++slotIdx) {
+	for (int charIdx = 0; charIdx < kNumCharacters; ++charIdx) {
+		for (int slotIdx = 0; slotIdx < kMaxHotbarSlots; ++slotIdx) {
 			_slots[charIdx][slotIdx].item = Nothing;
 			_slots[charIdx][slotIdx].proto = 0;
 		}
@@ -60,6 +60,8 @@ constexpr int kHotbarSlotHeight = 36;
 constexpr int kHotbarPadding = 4;
 constexpr int kHotbarDimColorIndex = 10; // Placeholder index for dim border
 
+const char *const slotLabels[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
 HotbarPanel::HotbarPanel(gPanelList &list, const Rect16 &box) : gControl(list, box, nullptr, 0) {
 }
 
@@ -72,16 +74,15 @@ void HotbarPanel::draw() {
 	int startX = _extent.x + kHotbarPadding;
 	int startY = _extent.y + 2;
 	
-	for (int i = 0; i < 9; ++i) {
+	for (int i = 0; i < kMaxHotbarSlots; ++i) {
 		Rect16 slotRect(startX + (kHotbarSlotWidth + kHotbarPadding) * i, startY, kHotbarSlotWidth, kHotbarSlotHeight);
 		
 		// Draw empty frame (dim border)
 		port.frameRect(slotRect, kHotbarDimColorIndex);
 		
 		// Draw number label
-		Common::String label = Common::String::format("%d", i + 1);
 		port.moveTo(slotRect.x + 2, slotRect.y + 2);
-		port.drawText(label.c_str(), 1);
+		port.drawText(slotLabels[i], 1);
 	}
 }
 
