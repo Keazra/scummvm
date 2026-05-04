@@ -687,7 +687,7 @@ void GameObject::objCursorText(char nameBuf[], const int8 size, int16 count) {
 				case kDamageDirMagic:   typeName = _("Magic"); break;
 				case kDamageHeat:       typeName = _("Heat"); break;
 				case kDamageMental:     typeName = _("Mental"); break;
-				case kDamageUndead:     typeName = _("Undead"); break;
+				case kDamageToUndead:   typeName = _("Undead"); break;
 				case kDamageStarve:     typeName = _("Starve"); break;
 				case kDamageEnergy:     typeName = _("Energy"); break;
 				case kDamageOther:      typeName = _("Other"); break;

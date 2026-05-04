@@ -946,7 +946,7 @@ void TileModeHandleKey(int16 key, int16 qual) {
 
 	//  Avoid using tolower on non-ASCII keys as it can corrupt keycodes
 	//  for function keys etc.
-	int16 lowerKey = (key >= 'A' && key <= 'Z') ? Common::toLower((char)key) : key;
+	int16 lowerKey = (key >= 'A' && key <= 'Z') ? (int16)tolower((unsigned char)key) : key;
 
 	switch (lowerKey) {
 

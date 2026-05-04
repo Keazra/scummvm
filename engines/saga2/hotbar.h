@@ -34,7 +34,7 @@ class HotbarState {
 public:
 	struct Slot {
 		ObjectID item;
-		ProtoObjID proto;
+		ObjectID proto;
 	};
 
 private:
@@ -42,7 +42,7 @@ private:
 
 public:
 	HotbarState();
-	
+
 	void assign(int characterIdx, int slotIdx, ObjectID obj);
 	void clear(int characterIdx, int slotIdx);
 	bool isPresent(int characterIdx, int slotIdx) const;
